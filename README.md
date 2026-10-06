@@ -62,8 +62,10 @@ the ratings; the class names it expects are at the top of the file.
 5. In the PR description: what works, what doesn't yet, and how you tested it
    with chaos on. Screenshots of the Network panel are welcome.
 
-Keep the PR to this task. A brief from the team build (reviews, orders,
-search…) goes in a second branch and a second PR, on top of the first.
+Keep the PR to this task. The homework after it, one or several of the
+[feature requests](https://github.com/nlopin/harbour-market-starter/issues)
+(reviews, orders, search…), goes in a second branch and a second PR, on top
+of the first, with `Closes #N` for each issue it does.
 `package.json` and `.github/` belong to the course: a PR that changes them
 fails its check. All your code goes in `starter/`.
 
@@ -76,5 +78,5 @@ starter/js/render.js   draws everything from state
 starter/js/main.js     events and the start
 starter/js/data.js     the hand-typed stalls: to replace
 starter/css/fetch.css  styles for loading, errors, ratings (ready)
-starter/admin.html     starter for team brief 5 (+ js/admin.js, css/admin.css)
+starter/admin.html     starter for issue #5, vendor admin (+ js/admin.js, css/admin.css)
 ```
