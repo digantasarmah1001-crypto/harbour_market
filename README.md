@@ -18,6 +18,10 @@ Put that base URL (ending in `/api`) into `API` at the top of
 your URL, turns **chaos** on and off (slow responses, 503s) and **resets** your
 market to the seed data. Nobody else's market is affected by yours.
 
+The server also answers about **1 request in 10 with a 500**, on purpose and
+always. A failed request changed nothing, so it's safe to send it again: your
+page has to say what happened and offer to try again.
+
 The API is documented at
 https://lopin.me/harbour/programming-interactivity-8-fetch/api.html.
 
