@@ -1,0 +1,31 @@
+# Fails a student's pull request that changes the repository's tooling.
+# The owner's own pull requests are not checked.
+name: Course files are read-only
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  untouched:
+    if: github.event.pull_request.user.login != github.repository_owner
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: No changes to package.json or .github/
+        run: |
+          changed=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD" -- package.json .github)
+          if [ -n "$changed" ]; then
+            echo "::error::This pull request changes files that belong to the course:"
+            echo "$changed"
+            echo "Your code goes in starter/. Restore these files from main and push again:"
+            echo "  git checkout origin/main -- package.json .github"
+            exit 1
+          fi
+          echo "package.json and .github/ are untouched."

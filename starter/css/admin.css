@@ -1,0 +1,12 @@
+/* Team brief 5 starter: the admin page. Change freely. */
+.admin { max-width: 60rem; margin: 0 auto; padding: 2rem 1.25rem; }
+.admin h1 { font: 400 2.6rem/1 "Instrument Serif", Georgia, serif; margin: 0.5rem 0 1.5rem; }
+.token-form { display: flex; flex-wrap: wrap; gap: 0.5rem 0.8rem; align-items: center; margin-bottom: 1.5rem; }
+.token-form input { font: inherit; color: var(--ink); background: var(--night-2); border: 2px solid var(--line); border-radius: 8px; padding: 0.4rem 0.6rem; }
+.token-form button, .remove { font: 700 0.9rem system-ui, sans-serif; color: var(--night); background: var(--lantern); border: 0; border-radius: 99px; padding: 0.5rem 1rem; cursor: pointer; }
+.token-status, .admin-status { margin: 0; color: var(--ink-2); }
+.admin-error { color: var(--ember); }
+.stalls { width: 100%; border-collapse: collapse; }
+.stalls th, .stalls td { text-align: left; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--line); }
+.stalls tr[aria-busy="true"] { opacity: 0.5; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }

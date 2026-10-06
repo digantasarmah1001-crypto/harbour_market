@@ -1,0 +1,39 @@
+/* ==========================================================================
+   Lecture 8 · what the network adds: loading, failing, ratings.
+   Ready to use. The class names it expects (see the comments below):
+     .vendor-list[aria-busy="true"] .empty   a "Loading…" message in the list
+     .load-error  >  p + button             the error message and Try again
+     .vendor-card .rating                   "★ 4.7 · 3 reviews" on a card
+   Your team's feature goes in its own stylesheet, next to this one.
+   ========================================================================== */
+
+.vendor-card .rating { font: 700 0.8rem/1 ui-monospace, Menlo, monospace; color: var(--lantern); margin: -0.6rem 0 1rem; }
+
+/* while the request is in flight */
+.vendor-list[aria-busy="true"] .empty { animation: pulse 1.2s ease-in-out infinite alternate; }
+@keyframes pulse { from { opacity: 0.4; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .vendor-list[aria-busy="true"] .empty { animation: none; } }
+
+/* when it failed */
+.load-error:has(button:not([hidden])) {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem 1.2rem;
+  border: 2px solid var(--ember); border-radius: 12px;
+  padding: 1rem 1.2rem; margin: 0 0 1.5rem;
+  background: color-mix(in srgb, var(--ember) 12%, var(--night-2));
+}
+.load-error p { margin: 0; color: var(--ink); }
+.status:focus { outline: none; }
+
+/* the wide featured card: the rating gets its own row in the grid */
+@container stall (width >= 34rem) {
+  .vendor-card {
+    grid-template-rows: auto auto auto auto 1fr;
+    grid-template-areas:
+      "tag    text"
+      "title  text"
+      "price  text"
+      "rating text"
+      "link   text";
+  }
+  .vendor-card .rating { grid-area: rating; margin: 0.4rem 0 1rem; }
+}

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E🏮%3C/text%3E%3C/svg%3E">
+  <title>Vendor admin · Harbour Night Market</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Instrument+Serif:ital@0;1&display=swap">
+  <link rel="stylesheet" href="css/outfit.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <!-- Team brief 5 starter. Your code goes in js/admin.js -->
+  <script type="module" src="js/admin.js"></script>
+</head>
+<body>
+  <main class="admin">
+    <p><a href="index.html">← The market</a></p>
+    <h1>Vendor admin</h1>
+
+    <form class="token-form">
+      <label for="token">Token</label>
+      <input id="token" name="token" type="password" autocomplete="off" required>
+      <button type="submit">Use this token</button>
+      <p class="token-status" role="status"></p>
+    </form>
+
+    <p class="admin-status" role="status"></p>
+    <p class="admin-error" role="alert"></p>
+
+    <table class="stalls">
+      <thead>
+        <tr><th scope="col">Name</th><th scope="col">Tag</th><th scope="col">Price</th><th scope="col">Sold out</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <template id="row-template">
+      <tr>
+        <td class="name"></td>
+        <td class="tag"></td>
+        <td class="price"></td>
+        <td><input class="sold-out" type="checkbox"></td>
+        <td><button class="remove" type="button">Remove</button></td>
+      </tr>
+    </template>
+  </main>
+</body>
+</html>
