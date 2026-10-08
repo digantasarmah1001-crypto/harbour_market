@@ -5,6 +5,7 @@ import { render } from "./render.js";
 import { getJSON, describe } from "./api.js";
 import { setupMenu } from "./menu.js";
 import { setupTickets } from "./tickets.js";
+import { setupReviews, openReviews } from "./reviews.js";
 
 const filters = document.querySelector(".filters");
 const list = document.querySelector(".vendor-list");
@@ -52,7 +53,13 @@ document.querySelector("#vendor-search").addEventListener("input", (event) => {
 });
 
 // The cards are redrawn all the time: one listener on the list hears every ♡
+// and every Reviews button
 list.addEventListener("click", (event) => {
+  const reviews = event.target.closest(".reviews-open");
+  if (reviews) {
+    openReviews(reviews.closest(".stall").dataset.id);
+    return;
+  }
   const button = event.target.closest(".save");
   if (!button) return;
   toggleSaved(button.closest(".stall").dataset.id);
@@ -68,5 +75,6 @@ retry.addEventListener("click", () => {
 
 setupMenu();
 setupTickets();
+setupReviews();
 load();
 await loadStalls();

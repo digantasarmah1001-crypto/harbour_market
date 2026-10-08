@@ -10,7 +10,7 @@ const errorText = document.querySelector(".load-error [role='alert']");
 const retry = document.querySelector(".load-error .retry");
 
 // "★ 4.7 · 3 reviews", or "no reviews yet" before anyone has written one
-function ratingText(stall) {
+export function ratingText(stall) {
   if (!stall.reviewCount) return "no reviews yet";
   const reviews = stall.reviewCount === 1 ? "review" : "reviews";
   return `★ ${stall.rating.toFixed(1)} · ${stall.reviewCount} ${reviews}`;
@@ -32,6 +32,7 @@ function card(stall) {
   li.querySelector(".price").textContent = stall.price === 0 ? "free" : `from €${stall.price}`;
   li.querySelector(".rating").textContent = ratingText(stall);
   li.querySelector(".badge").hidden = !stall.soldOut;
+  li.querySelector(".reviews-open").setAttribute("aria-label", `Reviews for ${stall.name}`);
 
   const isSaved = state.saved.has(stall.id);
   const save = li.querySelector(".save");
