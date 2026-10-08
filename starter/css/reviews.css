@@ -105,7 +105,8 @@ dialog.reviews:has(.review-list[aria-busy="true"]) .reviews-status { animation: 
   padding: 0.6rem 0.8rem;
 }
 .review-form textarea { resize: vertical; }
-.review-form [aria-invalid="true"] { border-color: var(--ember); }
+.review-form input[aria-invalid="true"],
+.review-form textarea[aria-invalid="true"] { border-color: var(--ember); }
 .review-form .hint { margin: 0; color: var(--ink-2); font-size: 0.85rem; }
 .field-error, .form-error { margin: 0; color: var(--ember); font-size: 0.9rem; font-weight: 700; }
 .field-error:empty, .form-error:empty { display: none; }
@@ -115,7 +116,8 @@ dialog.reviews:has(.review-list[aria-busy="true"]) .reviews-status { animation: 
 .stars { border: 0; margin: 0; padding: 0; display: flex; align-items: center; flex-wrap: wrap; }
 .stars legend { padding: 0; margin-bottom: 0.2rem; }
 .stars input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-.stars label { font-size: 1.8rem; line-height: 1; padding: 0 0.15rem; margin: 0; color: var(--line); cursor: pointer; }
+/* an empty star still needs 3:1 against the dialog to be seen */
+.stars label { font-size: 1.8rem; line-height: 1; padding: 0 0.15rem; margin: 0; color: color-mix(in srgb, var(--ink-2) 55%, var(--night-2)); cursor: pointer; }
 .stars input:focus-visible + label { outline: 3px solid var(--sea); outline-offset: 2px; border-radius: 4px; }
 .stars:has(input[value="1"]:checked) label:nth-of-type(-n + 1),
 .stars:has(input[value="2"]:checked) label:nth-of-type(-n + 2),
@@ -136,3 +138,8 @@ dialog.reviews:has(.review-list[aria-busy="true"]) .reviews-status { animation: 
   cursor: pointer;
 }
 .review-submit:disabled { opacity: 0.6; cursor: progress; }
+
+/* ---------- print: nothing to click on paper ---------- */
+@media print {
+  .reviews-open, dialog.reviews { display: none; }
+}

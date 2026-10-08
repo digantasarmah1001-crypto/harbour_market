@@ -39,7 +39,11 @@ function loadMine() {
 }
 const mine = loadMine();
 function saveMine() {
-  localStorage.setItem(MINE_KEY, JSON.stringify([...mine]));
+  try {
+    localStorage.setItem(MINE_KEY, JSON.stringify([...mine]));
+  } catch {
+    // storage full or blocked: the review is posted, only "Delete" is lost after a reload
+  }
 }
 
 const stallById = (id) => state.stalls.find((stall) => stall.id === id);
@@ -313,9 +317,14 @@ function closeReviews() {
 export function setupReviews() {
   dialog.querySelector(".reviews-close").addEventListener("click", closeReviews);
 
-  // a click on the backdrop lands on the dialog itself
+  // A click on the backdrop lands on the dialog itself, but so does a click
+  // on the dialog's own padding: only a click outside its box closes it
   dialog.addEventListener("click", (event) => {
-    if (event.target === dialog) closeReviews();
+    if (event.target !== dialog) return;
+    const box = dialog.getBoundingClientRect();
+    const inside = event.clientX >= box.left && event.clientX <= box.right
+      && event.clientY >= box.top && event.clientY <= box.bottom;
+    if (!inside) closeReviews();
   });
 
   retry.addEventListener("click", () => {
