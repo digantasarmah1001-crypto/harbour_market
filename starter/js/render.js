@@ -9,11 +9,14 @@ const search = document.querySelector("#vendor-search");
 const errorText = document.querySelector(".load-error [role='alert']");
 const retry = document.querySelector(".load-error .retry");
 
-// "★ 4.7 · 3 reviews", or "no reviews yet" before anyone has written one
+// "★ 4.7 · 3 reviews", or "no reviews yet" before anyone has written one.
+// The API sends rating: null for a stall without reviews, so check before toFixed()
 export function ratingText(stall) {
-  if (!stall.reviewCount) return "no reviews yet";
-  const reviews = stall.reviewCount === 1 ? "review" : "reviews";
-  return `★ ${stall.rating.toFixed(1)} · ${stall.reviewCount} ${reviews}`;
+  const count = stall.reviewCount ?? 0;
+  if (!count) return "no reviews yet";
+  const reviews = count === 1 ? "review" : "reviews";
+  const stars = Number.isFinite(stall.rating) ? `★ ${stall.rating.toFixed(1)} · ` : "";
+  return `${stars}${count} ${reviews}`;
 }
 
 // Data in, element out
